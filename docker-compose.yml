@@ -1,32 +1,33 @@
 version: '3'
 services:
-        dbos:
+        avanishos:
                 image: mysql:5.7
                 volumes:
-                        - mysql_storage_new:/var/lib/mysql
+                        - the_new_storage:/var/lib/mysql
                 restart: always
                 environment:
-                        MYSQL_ROOT_PASSWORD: rootpass
+                        MYSQL_ROOT_PASSWORD: alahomora
                         MYSQL_USER: avanish
-                        MYSQL_PASSWORD: redhat
-                        MYSQL_DATABASE: mydb
+                        MYSQL_PASSWORD: avadakadavra
+                        MYSQL_DATABASE: avanishguptadb
                         
         wordpressos:
                 image: wordpress:5.1.1-php7.3-apache
                 restart: always
                 depends_on:
-                        - dbos
+                        - avanishos
                 ports:
                   - 1234:80
                 environment:
-                   WORDPRESS_DB_HOST: dbos
+                   WORDPRESS_DB_HOST: avanishos
                    WORDPRESS_DB_USER: avanish
-                   WORDPRESS_DB_PASSWORD: redhat
-                   WORDPRESS_DB_NAME: mydb
+                   WORDPRESS_DB_PASSWORD: avadakadavra
+                   WORDPRESS_DB_NAME: avanishguptadb
+
                 volumes:
-                    - wp_storage_new:/var/www/html
+                    - my_storage:/var/www/html
 volumes:
-    wp_storage_new:
-    mysql_storage_new:        
+    my_storage:
+    the_new_storage:        
                    
 
