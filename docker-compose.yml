@@ -1,33 +1,13 @@
-version: '3'
-services:
-        avanishos:
-                image: mysql:5.7
-                volumes:
-                        - the_new_storage:/var/lib/mysql
-                restart: always
-                environment:
-                        MYSQL_ROOT_PASSWORD: alahomora
-                        MYSQL_USER: avanish
-                        MYSQL_PASSWORD: avadakadavra
-                        MYSQL_DATABASE: avanishguptadb
-                        
-        wordpressos:
-                image: wordpress:5.1.1-php7.3-apache
-                restart: always
-                depends_on:
-                        - avanishos
-                ports:
-                  - 1234:80
-                environment:
-                   WORDPRESS_DB_HOST: avanishos
-                   WORDPRESS_DB_USER: avanish
-                   WORDPRESS_DB_PASSWORD: avadakadavra
-                   WORDPRESS_DB_NAME: avanishguptadb
+web:
+   image: avanish007/composeapp
+   command: python app.py
+   ports:
+      - "5000:5000"
+   volumes:
+      - .:/composeapp
+   links:
+      - redis
+   redis:
+      image: redis
 
-                volumes:
-                    - my_storage:/var/www/html
-volumes:
-    my_storage:
-    the_new_storage:        
-                   
 
